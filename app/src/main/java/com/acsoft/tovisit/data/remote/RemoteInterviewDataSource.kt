@@ -1,10 +1,10 @@
 package com.acsoft.tovisit.data.remote
 
-import com.acsoft.tovisit.data.model.InterviewList
+import com.acsoft.tovisit.data.model.InterviewItem
 
 class RemoteInterviewDataSource(private val webService: WebService) {
 
-    suspend fun getInterviews() : InterviewList {
+    suspend fun getInterviews() : List<InterviewItem> {
         return webService.getInterviews()
     }
 

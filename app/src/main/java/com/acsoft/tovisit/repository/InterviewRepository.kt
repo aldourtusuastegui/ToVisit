@@ -1,9 +1,9 @@
 package com.acsoft.tovisit.repository
 
-import com.acsoft.tovisit.data.model.InterviewList
+import com.acsoft.tovisit.data.model.InterviewItem
 
 interface InterviewRepository {
 
-    suspend fun getInterviews() : InterviewList
+    suspend fun getInterviews() : List<InterviewItem>
 
 }
