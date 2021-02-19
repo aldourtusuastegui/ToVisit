@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.acsoft.tovisit.core.Resource
 import com.acsoft.tovisit.data.remote.RemoteInterviewDataSource
 import com.acsoft.tovisit.data.remote.RetrofitClient
 import com.acsoft.tovisit.presentation.InterviewModelFactory
@@ -18,13 +19,24 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewModel.getInterviews().observe(this,{ result ->
-            Log.d("NEW",result.toString())
+            when (result) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                   val street = result.data[0].streetName
+                    val latitude = result.data[0].location.latitude
+
+                    Log.d("NEW",street)
+                    Log.d("NEW",latitude.toString())
+                }
+                is Resource.Failure -> {
+                }
+            }
         })
 
     }

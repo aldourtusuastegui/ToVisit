@@ -13,7 +13,7 @@ class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
     fun getInterviews() = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success((repo.getInterviews())))
+            emit(Resource.Success(repo.getInterviews()))
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
