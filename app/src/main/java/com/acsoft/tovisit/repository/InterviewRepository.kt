@@ -1,9 +1,10 @@
 package com.acsoft.tovisit.repository
 
-import com.acsoft.tovisit.data.model.InterviewItem
+import com.acsoft.tovisit.data.model.InterviewItemEntity
+import kotlinx.coroutines.flow.Flow
 
 interface InterviewRepository {
 
-    suspend fun getInterviews() : List<InterviewItem>
+    suspend fun getInterviews() : Flow<List<InterviewItemEntity>>
 
 }

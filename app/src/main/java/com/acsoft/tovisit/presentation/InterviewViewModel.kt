@@ -3,6 +3,7 @@ package com.acsoft.tovisit.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import com.acsoft.tovisit.core.Resource
 import com.acsoft.tovisit.repository.InterviewRepository
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,11 @@ import java.lang.Exception
 
 class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
 
+
+    suspend fun getlist() = repo.getInterviews().asLiveData()
+
     fun getInterviews() = liveData(Dispatchers.IO) {
+
         emit(Resource.Loading())
         try {
             emit(Resource.Success(repo.getInterviews()))
@@ -18,6 +23,8 @@ class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
             emit(Resource.Failure(e))
         }
     }
+
+
 
 }
 
