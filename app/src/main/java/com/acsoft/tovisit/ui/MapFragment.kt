@@ -1,8 +1,10 @@
 package com.acsoft.tovisit.ui
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_map.*
+import java.util.*
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
@@ -39,10 +42,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val viewModel by viewModels<InterviewViewModel> {
         InterviewModelFactory(
             InterviewRepositoryImpl(
-            requireContext(),
-            RemoteInterviewDataSource(RetrofitClient.webService),
-            LocalInterviewDataSource(AppDatabase.getDatabase(requireContext()).interviewDao())
-        )
+                requireContext(),
+                RemoteInterviewDataSource(RetrofitClient.webService),
+                LocalInterviewDataSource(AppDatabase.getDatabase(requireContext()).interviewDao())
+            )
         )
     }
 
@@ -71,14 +74,37 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             NavHostFragment.findNavController(this).navigateUp()
         }
 
+        binding.btnSurf.setOnClickListener {
+
+            val uri: String = java.lang.String.format(
+                Locale.ENGLISH,
+                "http://maps.google.com/maps?q=loc:%f,%f",
+                args.latitude.toDouble(),
+                args.longitude.toDouble()
+            )
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
+
+        }
+
         binding.btnDoVisit.setOnClickListener {
-           viewModel.updateAccount(args.streetName,true)
-           marker.setIcon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_visited_marker))
+           viewModel.updateAccount(args.streetName, true)
+           marker.setIcon(
+               bitmapDescriptorFromVector(
+                   requireContext(),
+                   R.drawable.ic_visited_marker
+               )
+           )
 
            binding.ivVisited.backgroundTintList = ContextCompat
-                .getColorStateList(requireContext(),R.color.visited_color)
+                .getColorStateList(requireContext(), R.color.visited_color)
 
-           binding.tvVisited.setTextColor(ContextCompat.getColor(requireContext(),R.color.visited_color))
+           binding.tvVisited.setTextColor(
+               ContextCompat.getColor(
+                   requireContext(),
+                   R.color.visited_color
+               )
+           )
 
            binding.tvVisited.text = context?.getString(R.string.visited)
 
@@ -91,12 +117,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private fun showInterviewData() {
 
         binding.ivVisited.backgroundTintList = ContextCompat
-            .getColorStateList(requireContext(), if(args.visited) R.color.visited_color else R.color.pending_color)
+            .getColorStateList(
+                requireContext(),
+                if (args.visited) R.color.visited_color else R.color.pending_color
+            )
 
-        binding.tvVisited.setTextColor(ContextCompat.getColor(requireContext(),
-            if(args.visited) R.color.visited_color else R.color.pending_color))
+        binding.tvVisited.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (args.visited) R.color.visited_color else R.color.pending_color
+            )
+        )
 
-        binding.tvVisited.text = if (args.visited) context?.getString(R.string.visited) else context?.getString(R.string.pending)
+        binding.tvVisited.text = if (args.visited) context?.getString(R.string.visited) else context?.getString(
+            R.string.pending
+        )
 
         binding.tvStreetName.text = args.streetName
         binding.tvSuburb.text = args.suburb
@@ -111,7 +146,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 MarkerOptions()
                     .position(myLocation)
                     .title(args.streetName)
-                    .icon(bitmapDescriptorFromVector(requireContext(),if (args.visited) R.drawable.ic_visited_marker else R.drawable.ic_marker))
+                    .icon(
+                        bitmapDescriptorFromVector(
+                            requireContext(),
+                            if (args.visited) R.drawable.ic_visited_marker else R.drawable.ic_marker
+                        )
+                    )
             )
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.0f))
             googleMap.uiSettings.isZoomControlsEnabled = false

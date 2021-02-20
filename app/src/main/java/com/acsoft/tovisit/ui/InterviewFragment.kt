@@ -113,7 +113,6 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
     }
 
     override fun onInterviewClick(interview: InterviewItemEntity) {
-        Toast.makeText(requireContext(),interview.streetName,Toast.LENGTH_SHORT).show()
         val action = InterviewFragmentDirections.actionInterviewFragmentToMapFragment(
             interview.streetName,
             interview.suburb,
