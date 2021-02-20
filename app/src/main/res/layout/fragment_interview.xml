@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Hola Ignacio"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:textColor="#333333"
                 android:text=", buenos días!"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -79,11 +81,12 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_number_of_visits"
+            android:id="@+id/tv_visits_to_do"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="Tienes 5 visitas por hacer"
+            tools:text="Tienes 5 visitas por hacer"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView

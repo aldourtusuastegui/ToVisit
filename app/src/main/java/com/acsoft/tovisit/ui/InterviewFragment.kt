@@ -60,11 +60,9 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
     }
 
     private fun showVisitsToDo() {
-        lifecycleScope.launch {
-            viewModel.getVisitsToDo().observe(requireActivity(), { number ->
-                binding.tvNumberOfVisits.text = "Tienes ${number} visitas por hacer"
-            })
-        }
+        viewModel.getVisitsToDo().observe(requireActivity(), { number ->
+            binding.tvVisitsToDo.text = "Tienes ${number} visitas por hacer"
+        })
     }
 
     private fun showInterviews() {

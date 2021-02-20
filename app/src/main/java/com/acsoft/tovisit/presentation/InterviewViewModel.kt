@@ -14,7 +14,7 @@ class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
 
     suspend fun getInterviewsList() = repo.getInterviews().asLiveData()
 
-    suspend fun getVisitsToDo() = repo.getVisitsToDo().asLiveData()
+    fun getVisitsToDo() = repo.getVisitsToDo().asLiveData()
 
     fun searchInterview(interview: String) = repo.searchInterview(interview).asLiveData()
 
