@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.acsoft.tovisit.R
 import com.acsoft.tovisit.core.BaseViewHolder
 import com.acsoft.tovisit.data.model.InterviewItemEntity
 import com.acsoft.tovisit.databinding.InterviewItemBinding
@@ -50,12 +51,16 @@ class InterviewAdapter(private val itemClickListener: OnInterviewClickListener) 
     private inner class InterviewViewHolder(val binding : InterviewItemBinding, val context: Context) :
             BaseViewHolder<InterviewItemEntity>(binding.root) {
         override fun bind(item: InterviewItemEntity) {
-            binding.tvText.text = item.streetName
+
+            binding.tvVisited.text = if (item.visited) context.getString(R.string.visited)
+            else context.getString(R.string.pending)
+            binding.tvStreetName.text = item.streetName
+            binding.tvSuburb.text = item.suburb
         }
     }
 
     interface OnInterviewClickListener {
-        fun onInterviewClick(account: InterviewItemEntity)
+        fun onInterviewClick(interview: InterviewItemEntity)
     }
 
 }
