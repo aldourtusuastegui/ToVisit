@@ -9,4 +9,6 @@ interface InterviewRepository {
 
     suspend fun getVisitsToDo() : Flow<Int>
 
+    fun searchInterview(street : String) : Flow<List<InterviewItemEntity>>
+
 }

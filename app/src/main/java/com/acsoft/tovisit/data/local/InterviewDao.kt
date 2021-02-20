@@ -16,6 +16,10 @@ interface InterviewDao {
     @Query("SELECT COUNT(visited) FROM InterviewItemEntity WHERE visited = 0")
     fun getVisitsToDo() : Flow<Int>
 
+    @Query("SELECT * FROM InterviewItemEntity WHERE streetName LIKE '%' || :street || '%'")
+    fun searchInterview(street: String) : Flow<List<InterviewItemEntity>>
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveInterviews(interviewItemEntity: InterviewItemEntity)
 

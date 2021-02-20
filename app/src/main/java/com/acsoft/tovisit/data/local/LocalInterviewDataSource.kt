@@ -13,6 +13,10 @@ class LocalInterviewDataSource(private val interviewDao: InterviewDao) {
         return interviewDao.getVisitsToDo()
     }
 
+    fun searchInterview(street : String) : Flow<List<InterviewItemEntity>> {
+        return interviewDao.searchInterview(street)
+    }
+
     suspend fun saveInterviews(interviewItem: InterviewItemEntity) {
         interviewDao.saveInterviews(interviewItem)
     }

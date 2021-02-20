@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -53,18 +54,24 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentInterviewBinding.bind(view)
 
+        showVisitsToDo()
         showInterviews()
+        searchInterview()
+    }
+
+    private fun showVisitsToDo() {
+        lifecycleScope.launch {
+            viewModel.getVisitsToDo().observe(requireActivity(), { number ->
+                binding.tvNumberOfVisits.text = "Tienes ${number} visitas por hacer"
+            })
+        }
     }
 
     private fun showInterviews() {
         binding.rvInterview.layoutManager = LinearLayoutManager(requireContext())
         binding.rvInterview.adapter = adapter
 
-        lifecycleScope.launch {
-            viewModel.getVisitsToDo().observe(requireActivity(), { number ->
-                binding.tvNumberOfVisits.text = "Tienes ${number} visitas por hacer"
-            })
-        }
+
 
         lifecycleScope.launch {
             viewModel.getInterviewsList().observe(requireActivity(),{ list->
@@ -78,6 +85,22 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
                 }
             })
         }
+    }
+
+    private fun searchInterview() {
+        binding.searchInterview.setOnQueryTextListener(object :  SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchInterview(newText!!).observe(viewLifecycleOwner, {
+                    adapter.setInterviewList(it)
+                })
+                return false
+            }
+        })
     }
 
     override fun onInterviewClick(interview: InterviewItemEntity) {
