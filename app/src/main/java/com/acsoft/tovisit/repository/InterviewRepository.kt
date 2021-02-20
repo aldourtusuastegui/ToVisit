@@ -13,4 +13,6 @@ interface InterviewRepository {
 
     fun searchInterview(street : String) : Flow<List<InterviewItemEntity>>
 
+    suspend fun setVisited(streetName: String, isVisited: Boolean)
+
 }

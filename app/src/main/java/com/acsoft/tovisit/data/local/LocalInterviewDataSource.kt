@@ -20,4 +20,10 @@ class LocalInterviewDataSource(private val interviewDao: InterviewDao) {
     suspend fun saveInterviews(interviewItem: InterviewItemEntity) {
         interviewDao.saveInterviews(interviewItem)
     }
+
+    suspend fun setVisited(streetName: String, isVisited: Boolean) {
+        interviewDao.setVisited(streetName,isVisited)
+    }
+
+
 }

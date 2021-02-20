@@ -2,6 +2,7 @@ package com.acsoft.tovisit.presentation
 
 import androidx.lifecycle.*
 import com.acsoft.tovisit.repository.InterviewRepository
+import kotlinx.coroutines.launch
 
 class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
 
@@ -22,6 +23,13 @@ class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
     fun getVisitsToDo() = repo.getVisitsToDo().asLiveData()
 
     fun searchInterview(interview: String) = repo.searchInterview(interview).asLiveData()
+
+    fun updateAccount(streetName : String, isVisited : Boolean) {
+        viewModelScope.launch {
+            repo.setVisited(streetName, isVisited)
+        }
+    }
+
 
 }
 

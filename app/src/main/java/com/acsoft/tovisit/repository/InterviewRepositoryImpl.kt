@@ -46,4 +46,8 @@ class InterviewRepositoryImpl(private val context: Context,
     override fun searchInterview(street : String): Flow<List<InterviewItemEntity>> {
         return dataSourceLocal.searchInterview(street)
     }
+
+    override suspend fun setVisited(streetName: String, isVisited: Boolean) {
+        return dataSourceLocal.setVisited(streetName,isVisited)
+    }
 }

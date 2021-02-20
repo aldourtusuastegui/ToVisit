@@ -19,8 +19,11 @@ interface InterviewDao {
     @Query("SELECT * FROM InterviewItemEntity WHERE streetName LIKE '%' || :street || '%'")
     fun searchInterview(street: String) : Flow<List<InterviewItemEntity>>
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveInterviews(interviewItemEntity: InterviewItemEntity)
+
+    @Query("UPDATE InterviewItemEntity SET visited = :isVisited where streetName = :streetName")
+    suspend fun setVisited(streetName: String,isVisited: Boolean)
+
 
 }

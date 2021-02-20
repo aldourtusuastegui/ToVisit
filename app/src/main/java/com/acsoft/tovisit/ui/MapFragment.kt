@@ -10,17 +10,22 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.acsoft.tovisit.R
+import com.acsoft.tovisit.data.local.AppDatabase
+import com.acsoft.tovisit.data.local.LocalInterviewDataSource
+import com.acsoft.tovisit.data.remote.RemoteInterviewDataSource
+import com.acsoft.tovisit.data.remote.RetrofitClient
 import com.acsoft.tovisit.databinding.FragmentMapBinding
+import com.acsoft.tovisit.presentation.InterviewModelFactory
+import com.acsoft.tovisit.presentation.InterviewViewModel
+import com.acsoft.tovisit.repository.InterviewRepositoryImpl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_map.*
 
 
@@ -28,8 +33,18 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding : FragmentMapBinding
     private lateinit var googleMap:GoogleMap
-
+    private lateinit var marker: Marker
     private val args by navArgs<MapFragmentArgs>()
+
+    private val viewModel by viewModels<InterviewViewModel> {
+        InterviewModelFactory(
+            InterviewRepositoryImpl(
+            requireContext(),
+            RemoteInterviewDataSource(RetrofitClient.webService),
+            LocalInterviewDataSource(AppDatabase.getDatabase(requireContext()).interviewDao())
+        )
+        )
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -56,6 +71,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             NavHostFragment.findNavController(this).navigateUp()
         }
 
+        binding.btnDoVisit.setOnClickListener {
+           viewModel.updateAccount(args.streetName,true)
+           marker.setIcon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_visited_marker))
+        }
+
         showInterviewData()
 
     }
@@ -79,7 +99,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map?.let {
             googleMap = map
             val myLocation = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
-            googleMap.addMarker(
+            marker = googleMap.addMarker(
                 MarkerOptions()
                     .position(myLocation)
                     .title(args.streetName)
