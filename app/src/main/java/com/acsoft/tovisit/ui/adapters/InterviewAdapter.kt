@@ -3,6 +3,7 @@ package com.acsoft.tovisit.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.acsoft.tovisit.R
@@ -52,8 +53,14 @@ class InterviewAdapter(private val itemClickListener: OnInterviewClickListener) 
             BaseViewHolder<InterviewItemEntity>(binding.root) {
         override fun bind(item: InterviewItemEntity) {
 
-            binding.tvVisited.text = if (item.visited) context.getString(R.string.visited)
-            else context.getString(R.string.pending)
+            binding.ivVisited.backgroundTintList = ContextCompat
+                .getColorStateList(context, if(item.visited) R.color.visited_color else R.color.pending_color)
+
+            binding.tvVisited.setTextColor(ContextCompat.getColor(context,
+                if(item.visited) R.color.visited_color else R.color.pending_color))
+
+            binding.tvVisited.text = if (item.visited) context.getString(R.string.visited) else context.getString(R.string.pending)
+
             binding.tvStreetName.text = item.streetName
             binding.tvSuburb.text = item.suburb
         }
