@@ -61,7 +61,13 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
         binding.rvInterview.adapter = adapter
 
         lifecycleScope.launch {
-            viewModel.getlist().observe(requireActivity(),{ list->
+            viewModel.getVisitsToDo().observe(requireActivity(), { number ->
+                binding.tvNumberOfVisits.text = "Tienes ${number} visitas por hacer"
+            })
+        }
+
+        lifecycleScope.launch {
+            viewModel.getInterviewsList().observe(requireActivity(),{ list->
                 list.let {
                     if(list.isNotEmpty()) {
                         adapter.setInterviewList(list)

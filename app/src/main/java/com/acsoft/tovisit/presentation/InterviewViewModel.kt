@@ -12,19 +12,9 @@ import java.lang.Exception
 class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
 
 
-    suspend fun getlist() = repo.getInterviews().asLiveData()
+    suspend fun getInterviewsList() = repo.getInterviews().asLiveData()
 
-    fun getInterviews() = liveData(Dispatchers.IO) {
-
-        emit(Resource.Loading())
-        try {
-            emit(Resource.Success(repo.getInterviews()))
-        } catch (e: Exception) {
-            emit(Resource.Failure(e))
-        }
-    }
-
-
+    suspend fun getVisitsToDo() = repo.getVisitsToDo().asLiveData()
 
 }
 

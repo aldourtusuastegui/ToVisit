@@ -7,4 +7,6 @@ interface InterviewRepository {
 
     suspend fun getInterviews() : Flow<List<InterviewItemEntity>>
 
+    suspend fun getVisitsToDo() : Flow<Int>
+
 }

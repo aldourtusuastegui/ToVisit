@@ -16,31 +16,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<InterviewViewModel> {
-        InterviewModelFactory(InterviewRepositoryImpl(
-            applicationContext,
-            RemoteInterviewDataSource(RetrofitClient.webService),
-            LocalInterviewDataSource(AppDatabase.getDatabase(applicationContext).interviewDao())
-        ))
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lifecycleScope.launch {
-            viewModel.getlist().observe(this@MainActivity,{ list->
-                list.let {
-                    if(list.isNotEmpty()) {
-                        val xd = list[0].streetName
-                        Log.d("TAG",xd)
-                    } else {
-                        Log.d("TAG","vacio")
-                    }
-
-                }
-            })
-        }
-
     }
 }

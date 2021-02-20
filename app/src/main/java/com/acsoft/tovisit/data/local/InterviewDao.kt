@@ -13,6 +13,9 @@ interface InterviewDao {
     @Query("SELECT * FROM InterviewItemEntity")
     fun getInterviews() : Flow<List<InterviewItemEntity>>
 
+    @Query("SELECT COUNT(visited) FROM InterviewItemEntity WHERE visited = 0")
+    fun getVisitsToDo() : Flow<Int>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveInterviews(interviewItemEntity: InterviewItemEntity)
 

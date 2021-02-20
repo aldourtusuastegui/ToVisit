@@ -37,4 +37,7 @@ class InterviewRepositoryImpl(private val context: Context,
 
     }
 
+    override suspend fun getVisitsToDo(): Flow<Int> {
+        return dataSourceLocal.getVisitsToDo()
+    }
 }
