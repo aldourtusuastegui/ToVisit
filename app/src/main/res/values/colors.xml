@@ -13,4 +13,6 @@
     <color name="title">#333333</color>
     <color name="subtitle">#7C839D</color>
 
+    <color name="background">#f1f1f1</color>
+
 </resources>
