@@ -108,6 +108,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
            binding.tvVisited.text = context?.getString(R.string.visited)
 
+           binding.llButtons.visibility = View.GONE
+
         }
 
         showInterviewData()
@@ -135,6 +137,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         binding.tvStreetName.text = args.streetName
         binding.tvSuburb.text = args.suburb
+
+        binding.llButtons.visibility = if(args.visited) View.GONE else View.VISIBLE
     }
 
 
