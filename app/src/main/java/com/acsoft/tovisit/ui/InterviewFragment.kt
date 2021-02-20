@@ -1,6 +1,7 @@
 package com.acsoft.tovisit.ui
 
 import android.os.Bundle
+import android.transition.Visibility
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -60,8 +61,22 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
         searchInterview()
     }
 
+    private fun showAdvice(visit: Int) {
+        if (visit==0) {
+            binding.tvVisitsToDo.visibility = View.GONE
+            binding.rvInterview.visibility = View.GONE
+            binding.cvAdvice.visibility = View.VISIBLE
+        } else {
+            binding.tvVisitsToDo.visibility = View.VISIBLE
+            binding.rvInterview.visibility = View.VISIBLE
+            binding.cvAdvice.visibility = View.GONE
+        }
+
+    }
+
     private fun showVisitsToDo() {
         viewModel.getVisitsToDo().observe(requireActivity(), { number ->
+            showAdvice(number)
             binding.tvVisitsToDo.text = "Tienes ${number} visitas por hacer"
         })
     }

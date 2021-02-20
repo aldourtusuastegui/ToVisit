@@ -94,16 +94,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/advice"
+            android:id="@+id/cv_advice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="@dimen/margin_10"
+            android:visibility="gone"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
