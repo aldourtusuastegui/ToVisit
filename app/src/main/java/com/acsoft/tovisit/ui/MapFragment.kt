@@ -74,6 +74,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         binding.btnDoVisit.setOnClickListener {
            viewModel.updateAccount(args.streetName,true)
            marker.setIcon(bitmapDescriptorFromVector(requireContext(),R.drawable.ic_visited_marker))
+
+           binding.ivVisited.backgroundTintList = ContextCompat
+                .getColorStateList(requireContext(),R.color.visited_color)
+
+           binding.tvVisited.setTextColor(ContextCompat.getColor(requireContext(),R.color.visited_color))
+
+           binding.tvVisited.text = context?.getString(R.string.visited)
+
         }
 
         showInterviewData()
