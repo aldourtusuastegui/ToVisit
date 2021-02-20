@@ -7,6 +7,8 @@
     <string name="pending">Pendiente</string>
     <string name="surf">Navegar</string>
     <string name="do_visit">Realizar visita</string>
+    <string name="to_day">¡Wow! estás al día con tus visitas</string>
+    <string name="advice">Te avisaremos cuando haya más</string>
     <string name="google_maps_api_key">AIzaSyB5IUk_IU_zsFoDVE3UZvoS1KAk-S3RaWg</string>
 
 </resources>

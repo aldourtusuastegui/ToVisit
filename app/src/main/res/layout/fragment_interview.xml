@@ -92,8 +92,54 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvInterview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/default_margin"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:visibility="gone"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/advice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="@dimen/margin_10"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/ic_visited_marker"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/title"
+                    android:gravity="center"
+                    android:text="@string/to_day"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/subtitle"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:text="@string/advice"/>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>

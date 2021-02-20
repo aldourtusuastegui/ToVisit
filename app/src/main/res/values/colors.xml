@@ -10,5 +10,7 @@
 
     <color name="visited_color">#3ac2c2</color>
     <color name="pending_color">#AAAAAA</color>
+    <color name="title">#333333</color>
+    <color name="subtitle">#7C839D</color>
 
 </resources>
