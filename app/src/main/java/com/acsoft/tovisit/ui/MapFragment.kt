@@ -52,7 +52,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMapBinding.bind(view)
 
-        binding.textView.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             NavHostFragment.findNavController(this).navigateUp()
         }
 
@@ -69,7 +69,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     .icon(bitmapDescriptorFromVector(requireContext(),if (args.visited) R.drawable.ic_visited_marker else R.drawable.ic_marker))
             )
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 17.0f))
-            googleMap.uiSettings.isZoomControlsEnabled = true
+            googleMap.uiSettings.isZoomControlsEnabled = false
         }
     }
 

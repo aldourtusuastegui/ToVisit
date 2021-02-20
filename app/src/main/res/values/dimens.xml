@@ -3,5 +3,8 @@
 
     <dimen name="default_margin">20dp</dimen>
     <dimen name="title">16sp</dimen>
+    <dimen name="radious">10dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
 
 </resources>
