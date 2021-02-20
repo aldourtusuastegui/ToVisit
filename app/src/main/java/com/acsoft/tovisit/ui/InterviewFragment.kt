@@ -10,6 +10,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acsoft.tovisit.R
 import com.acsoft.tovisit.data.local.AppDatabase
@@ -103,5 +104,13 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
 
     override fun onInterviewClick(interview: InterviewItemEntity) {
         Toast.makeText(requireContext(),interview.streetName,Toast.LENGTH_SHORT).show()
+        val action = InterviewFragmentDirections.actionInterviewFragmentToMapFragment(
+            interview.streetName,
+            interview.suburb,
+            interview.visited,
+            interview.location.latitude.toFloat(),
+            interview.location.longitude.toFloat()
+        )
+        findNavController().navigate(action)
     }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
 }
@@ -47,6 +48,7 @@ dependencies {
     def fragment_version = "1.2.5"
     def room_version = "2.2.6"
     def nav_version = "2.3.3"
+    def googlePlayVersion = "17.0.0"
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -78,6 +80,10 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Maps
+    implementation "com.google.android.gms:play-services-maps:$googlePlayVersion"
+    implementation "com.google.android.gms:play-services-location:$googlePlayVersion"
 
 
     testImplementation 'junit:junit:4.+'

@@ -12,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToVisit">
+
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_api_key"/>
+
+
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.ToVisit.NoActionBar">
             <intent-filter>
@@ -20,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

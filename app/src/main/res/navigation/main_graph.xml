@@ -9,5 +9,30 @@
         android:id="@+id/interviewFragment"
         android:name="com.acsoft.tovisit.ui.InterviewFragment"
         android:label="fragment_interview"
-        tools:layout="@layout/fragment_interview" />
+        tools:layout="@layout/fragment_interview" >
+        <action
+            android:id="@+id/action_interviewFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.acsoft.tovisit.ui.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="streetName"
+            app:argType="string" />
+        <argument
+            android:name="suburb"
+            app:argType="string" />
+        <argument
+            android:name="visited"
+            app:argType="boolean" />
+        <argument
+            android:name="latitude"
+            app:argType="float" />
+        <argument
+            android:name="longitude"
+            app:argType="float" />
+    </fragment>
 </navigation>
