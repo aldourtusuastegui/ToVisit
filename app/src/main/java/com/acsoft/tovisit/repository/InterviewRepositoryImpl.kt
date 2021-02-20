@@ -2,7 +2,6 @@ package com.acsoft.tovisit.repository
 
 import android.content.Context
 import android.util.Log
-import com.acsoft.tovisit.core.Resource
 import com.acsoft.tovisit.data.local.LocalInterviewDataSource
 import com.acsoft.tovisit.data.model.InterviewItemEntity
 import com.acsoft.tovisit.data.model.toInterviewItemEntity

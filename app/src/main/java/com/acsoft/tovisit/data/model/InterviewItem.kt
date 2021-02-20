@@ -24,21 +24,6 @@ data class InterviewItemEntity(
     val location: Location,
 )
 
-fun List<InterviewItemEntity>.toInterviewList(): MutableList<InterviewItemData> {
-    val resultList = mutableListOf<InterviewItemData>()
-    this.forEach { interviewEntity ->
-        resultList.add(interviewEntity.toInterviewItemData())
-    }
-    return resultList
-}
-
-fun InterviewItemEntity.toInterviewItemData(): InterviewItemData = InterviewItemData(
-        this.streetName,
-        this.suburb,
-        this.visited,
-        this.location
-)
-
 fun InterviewItemData.toInterviewItemEntity(): InterviewItemEntity = InterviewItemEntity(
         this.streetName,
         this.suburb,
