@@ -1,18 +1,23 @@
 package com.acsoft.tovisit.presentation
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
-import androidx.lifecycle.asLiveData
-import com.acsoft.tovisit.core.Resource
+import androidx.lifecycle.*
 import com.acsoft.tovisit.repository.InterviewRepository
-import kotlinx.coroutines.Dispatchers
-import java.lang.Exception
 
 class InterviewViewModel(private val repo: InterviewRepository) : ViewModel() {
 
+    private var updated : Boolean = false
 
-    suspend fun getInterviewsList() = repo.getInterviews().asLiveData()
+    fun saveUpdated(updated: Boolean) {
+        this.updated = updated
+    }
+
+    fun getUpdated(): Boolean {
+        return updated
+    }
+
+    suspend fun getInterviewsListApi() = repo.getInterviewsApi().asLiveData()
+
+    fun getInterviewsListLocal() = repo.getInterviewsLocal().asLiveData()
 
     fun getVisitsToDo() = repo.getVisitsToDo().asLiveData()
 

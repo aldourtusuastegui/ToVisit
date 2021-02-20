@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface InterviewRepository {
 
-    suspend fun getInterviews() : Flow<List<InterviewItemEntity>>
+    suspend fun getInterviewsApi() : Flow<List<InterviewItemEntity>>
+
+    fun getInterviewsLocal() : Flow<List<InterviewItemEntity>>
 
     fun getVisitsToDo() : Flow<Int>
 

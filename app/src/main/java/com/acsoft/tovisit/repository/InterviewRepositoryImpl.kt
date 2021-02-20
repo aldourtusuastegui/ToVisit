@@ -14,7 +14,7 @@ class InterviewRepositoryImpl(private val context: Context,
                               private val dataSourceRemote : RemoteInterviewDataSource,
                               private val dataSourceLocal : LocalInterviewDataSource) : InterviewRepository {
 
-    override suspend fun getInterviews(): Flow<List<InterviewItemEntity>> {
+    override suspend fun getInterviewsApi(): Flow<List<InterviewItemEntity>> {
 
         if (isNetworkAvailable(context)) {
             val call = dataSourceRemote.getInterviews()
@@ -31,10 +31,12 @@ class InterviewRepositoryImpl(private val context: Context,
             }
         }
 
-
-
         return dataSourceLocal.getInterviews()
 
+    }
+
+    override fun getInterviewsLocal() : Flow<List<InterviewItemEntity>>  {
+        return dataSourceLocal.getInterviews()
     }
 
     override fun getVisitsToDo(): Flow<Int> {

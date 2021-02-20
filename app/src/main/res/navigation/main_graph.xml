@@ -30,9 +30,9 @@
             app:argType="boolean" />
         <argument
             android:name="latitude"
-            app:argType="float" />
+            app:argType="string" />
         <argument
             android:name="longitude"
-            app:argType="float" />
+            app:argType="string" />
     </fragment>
 </navigation>

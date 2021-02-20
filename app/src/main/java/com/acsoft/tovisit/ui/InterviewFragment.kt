@@ -70,20 +70,30 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
         binding.rvInterview.layoutManager = LinearLayoutManager(requireContext())
         binding.rvInterview.adapter = adapter
 
+        if (viewModel.getUpdated()) {
 
-
-        lifecycleScope.launch {
-            viewModel.getInterviewsList().observe(requireActivity(),{ list->
+            viewModel.getInterviewsListLocal().observe(requireActivity(), { list ->
                 list.let {
                     if(list.isNotEmpty()) {
                         adapter.setInterviewList(list)
-                    } else {
-                        Log.d("TAG","vacio")
                     }
-
                 }
             })
+
+        } else {
+            lifecycleScope.launch {
+                viewModel.getInterviewsListApi().observe(requireActivity(),{ list->
+                    list.let {
+                        if(list.isNotEmpty()) {
+                            adapter.setInterviewList(list)
+                            viewModel.saveUpdated(true)
+                        }
+                    }
+                })
+            }
         }
+
+
     }
 
     private fun searchInterview() {
@@ -108,9 +118,11 @@ class InterviewFragment : Fragment(),InterviewAdapter.OnInterviewClickListener {
             interview.streetName,
             interview.suburb,
             interview.visited,
-            interview.location.latitude.toFloat(),
-            interview.location.longitude.toFloat()
+            interview.location.latitude.toString(),
+            interview.location.longitude.toString()
         )
         findNavController().navigate(action)
     }
+
+
 }
