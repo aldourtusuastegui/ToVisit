@@ -14,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
@@ -54,17 +55,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
-            val location = LatLng(args.latitude.toDouble(),args.latitude.toDouble())
-            Log.d("TAG",args.latitude)
-            Log.d("TAG",args.longitude)
-            googleMap = it
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(location)
-                    .title(args.streetName)
-            )
+            googleMap = map
+            val myLocation = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
+            googleMap.addMarker(MarkerOptions()
+                .position(myLocation)
+                .title(args.streetName)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.avatar)))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,17.0f))
+            googleMap.uiSettings.isZoomControlsEnabled = true
 
-            map.moveCamera(CameraUpdateFactory.newLatLng(location))
+
+
         }
     }
 
