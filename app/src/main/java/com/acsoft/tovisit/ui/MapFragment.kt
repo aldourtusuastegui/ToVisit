@@ -56,7 +56,24 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             NavHostFragment.findNavController(this).navigateUp()
         }
 
+        showInterviewData()
+
     }
+
+    private fun showInterviewData() {
+
+        binding.ivVisited.backgroundTintList = ContextCompat
+            .getColorStateList(requireContext(), if(args.visited) R.color.visited_color else R.color.pending_color)
+
+        binding.tvVisited.setTextColor(ContextCompat.getColor(requireContext(),
+            if(args.visited) R.color.visited_color else R.color.pending_color))
+
+        binding.tvVisited.text = if (args.visited) context?.getString(R.string.visited) else context?.getString(R.string.pending)
+
+        binding.tvStreetName.text = args.streetName
+        binding.tvSuburb.text = args.suburb
+    }
+
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {

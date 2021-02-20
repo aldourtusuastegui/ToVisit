@@ -37,13 +37,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/iv_visited"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="14dp"
                     android:background="@drawable/circle"
-                    android:backgroundTint="#3ac2c2" />
+                    android:backgroundTint="@color/visited_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:textSize="11sp"
-                        android:textColor="#3ac2c2"
+                        android:textColor="@color/pending_color"
                         tools:text="Visitada" />
 
                     <TextView
@@ -104,13 +104,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/do_visit"
-                    app:strokeColor="#3ac2c2"
+                    app:strokeColor="@color/visited_color"
                     android:textColor="@color/white"
                     android:layout_marginLeft="@dimen/margin_15"
                     android:layout_marginRight="@dimen/margin_15"
                     app:cornerRadius="5dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:backgroundTint="#3ac2c2"/>
+                    android:backgroundTint="@color/visited_color"/>
 
             </LinearLayout>
 

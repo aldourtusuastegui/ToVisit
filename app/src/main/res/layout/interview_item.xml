@@ -21,7 +21,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_visited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -51,7 +51,7 @@
                 android:textSize="13sp"
                 android:textColor="#333333"
                 tools:text="Salvador Lopez Chavez"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/iv_visited"
                 app:layout_constraintTop_toBottomOf="@+id/tv_visited" />
 
             <TextView
